@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 // Props 로 꼭 children 만 받을 필요는 없답니다.
 const Layout = ({ children }) => {
   const navigate = useNavigate()
