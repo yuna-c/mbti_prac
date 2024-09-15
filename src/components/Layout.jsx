@@ -21,9 +21,11 @@ const Layout = ({ children, setUser, user }) => {
           <Link to="/">홈</Link>
           <div className="space-x-4">
             {user ? (
-              <>
+              <div className="flex gap-2 items-center">
+                <Link to="/profile">프로필</Link>
+                <div>{user.nickname}님</div>
                 <button onClick={handleLogout}>로그아웃</button>
-              </>
+              </div>
             ) : (
               <Link to="/login">로그인</Link>
             )}
