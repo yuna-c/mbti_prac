@@ -23,6 +23,7 @@ const Layout = ({ children, setUser, user }) => {
             {user ? (
               <div className="flex gap-2 items-center">
                 <Link to="/profile">프로필</Link>
+                <Link to="/test">테스트</Link>
                 <div>{user.nickname}님</div>
                 <button onClick={handleLogout}>로그아웃</button>
               </div>
