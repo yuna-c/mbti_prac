@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
-// import Signup from './pages/Signup'
+import Signup from './pages/Signup'
 // import ProfilePage from './pages/ProfilePage'
 // import TestPage from './pages/TestPage'
 // import TestResultPage from './pages/TestResultPage'
@@ -21,8 +21,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login setUser={setUser} />} />
-          {/*
           <Route path="/signup" element={<Signup />} />
+
+          {/*
           <Route
             path="/profile"
             element={
