@@ -1,7 +1,7 @@
 {
   "testResults": [
     {
-      "id": "a9c3",
+      "id": "1ee1",
       "userId": "mutate1234",
       "nickname": "아 졸려",
       "result": "INFP",
@@ -27,7 +27,67 @@
         null,
         null
       ],
-      "date": "2024-09-15T12:41:21.332Z",
+      "date": "2024-09-15T12:45:48.188Z",
+      "visibility": true
+    },
+    {
+      "id": "b5ff",
+      "userId": "mutate1234",
+      "nickname": "아 졸려",
+      "result": "INFP",
+      "answers": [
+        null,
+        null,
+        null,
+        "예",
+        "예",
+        "예",
+        "아니오",
+        "아니오",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "date": "2024-09-15T12:46:47.331Z",
+      "visibility": false
+    },
+    {
+      "id": "9ca7",
+      "userId": "tester999999",
+      "nickname": "너 문제있어?",
+      "result": "INFP",
+      "answers": [
+        "아니오",
+        "아니오",
+        null,
+        "아니오",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "아니오",
+        null,
+        null,
+        null
+      ],
+      "date": "2024-09-15T12:55:59.315Z",
       "visibility": true
     }
   ]
