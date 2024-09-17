@@ -78,6 +78,7 @@ export default function SignIn({ setUser }) {
     console.log('로그인 API 응답값 : ', userId, nickname, avatar)
     // 2. 상태 관리에 넣어줌
     setUser({ userId, nickname, avatar })
+    navigate('/')
   }
   return (
     <Container className="SignIn">
