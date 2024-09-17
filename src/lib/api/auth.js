@@ -50,7 +50,8 @@ export const getUserInfo = async () => {
       return response.data
     } catch (error) {
       console.log(error?.response?.data.message)
-      alert(error?.response?.data.message)
+      alert('accessToken이 만료되었습니다')
+      localStorage.clear()
     }
   }
 }
