@@ -16,6 +16,10 @@ const Navbar = styled.nav`
   z-index: 1000;
   max-width: 1240px;
 `
+const NavItems = styled.div`
+  display: flex;
+  align-items: center;
+`
 const NavItem = styled(Link)`
   color: #fff;
   margin: 0 10px;
@@ -35,7 +39,7 @@ const UserAvatar = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-left: 10px;
+  margin-right: 10px;
 `
 
 const UserName = styled.span`
@@ -88,10 +92,23 @@ export default function Layout({ setUser, user }) {
   return (
     <>
       <Navbar>
-        여기가 네비바
-        <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+        <NavItems>
+          <NavItem to="/">Home</NavItem>
+          <NavItem to="/profile">프로필</NavItem>
+        </NavItems>
+        <UserProfile>
+          {user && (
+            <>
+              <UserAvatar src={user.avatar} alt={user.nickname} />
+              <UserName>{user.nickname}</UserName>
+              <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+            </>
+          )}
+        </UserProfile>
       </Navbar>
-      <Outlet />
+      <PageContainer>
+        <Outlet />
+      </PageContainer>
     </>
   )
 }
