@@ -109,16 +109,16 @@ export default function SignUp() {
     <Container className="SignIn">
       <InputGroup>
         <label htmlFor="nickname">닉네임</label>
-        <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="닉네임" />
+        <input type="text" id="nickname" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="닉네임" />
       </InputGroup>
       <InputGroup>
         <label htmlFor="id">아이디</label>
-        <input type="text" value={id} onChange={(e) => setId(e.target.value)} placeholder="아이디" />
+        <input type="text" id="id" value={id} onChange={(e) => setId(e.target.value)} placeholder="아이디" />
         {/* 유효성 검사 2 : minLength="2" maxLength="8" 입력 제한 */}
       </InputGroup>
       <InputGroup>
         <label htmlFor="password">비밀번호</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="비밀번호" />
+        <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="비밀번호" />
       </InputGroup>
       <ButtonGroup>
         <Button onClick={handelSignIn}>회원가입</Button>
