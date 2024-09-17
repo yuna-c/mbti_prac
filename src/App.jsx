@@ -67,13 +67,15 @@ function App() {
     }
   ])
 
+  const [user, setUser] = useState(null)
+  console.log(`현재 로그인 유저 아이디`, user)
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home expenses={expenses} setExpenses={setExpenses} />} />
           <Route path="/detail/:id" element={<Detail expenses={expenses} setExpenses={setExpenses} />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
       </BrowserRouter>

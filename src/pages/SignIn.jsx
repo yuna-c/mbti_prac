@@ -63,7 +63,7 @@ const ToggleButton = styled.button`
   margin-bottom: 10px;
 `
 
-export default function SignIn() {
+export default function SignIn({ setUser }) {
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
@@ -72,8 +72,12 @@ export default function SignIn() {
     console.log(`Id=>`, id)
     console.log(`Password=>`, password)
 
-    const response = await login({ id: id, password: password })
-    console.log('로그인 API 응답값 : ', response)
+    // 1. const response = 구조 분해 할당
+    // 1. console.log('로그인 API 응답값 : ', response.userId, response.nickname, response.avatar);
+    const { userId, nickname, avatar } = await login({ id: id, password: password })
+    console.log('로그인 API 응답값 : ', userId, nickname, avatar)
+    // 2. 상태 관리에 넣어줌
+    setUser({ userId, nickname, avatar })
   }
   return (
     <Container className="SignIn">
