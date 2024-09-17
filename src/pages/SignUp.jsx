@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { register } from '../lib/api/auth'
 
 const Container = styled.div`
   max-width: 800px;
@@ -68,7 +69,7 @@ export default function SignUp() {
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
-  const handelSignIn = () => {
+  const handelSignIn = async () => {
     console.log(`Id=>`, id)
     console.log(`Password=>`, password)
     console.log(`nickname=>`, nickname)
@@ -91,6 +92,13 @@ export default function SignUp() {
 
     // API 호출을 진짜로 하는 부분
     console.log('회원가입 API 호출')
+    // 응답값이 나올때 까지 처리 안되도록 하기 위해 불러오고 await, 준다
+    const response = await register({
+      id: id,
+      password: password,
+      nickname: nickname
+    })
+    console.log('회원가입 API 응답값 : ', response)
   }
 
   return (
