@@ -28,6 +28,7 @@ export const login = async ({ id, password }) => {
       password: password
     })
     console.log(response)
+    localStorage.setItem('accessToken', response.data.accessToken)
     return response.data
   } catch (error) {
     console.log(error?.response?.data.message)
