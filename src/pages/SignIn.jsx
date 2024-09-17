@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { login } from '../lib/api/auth'
 
 const Container = styled.div`
   max-width: 800px;
@@ -67,9 +68,12 @@ export default function SignIn() {
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
-  const handelSignIn = () => {
+  const handelSignIn = async () => {
     console.log(`Id=>`, id)
     console.log(`Password=>`, password)
+
+    const response = await login({ id: id, password: password })
+    console.log('로그인 API 응답값 : ', response)
   }
   return (
     <Container className="SignIn">
