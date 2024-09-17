@@ -71,18 +71,26 @@ export default function Layout({ setUser, user }) {
         setUser({ userId: res.id, nickname: res.nickname, avatar: res.avatar })
       } else {
         // 토큰 만료시 로컬스토리지 비우고, setUser 초기화, 로그인 페이지로 돌리기
-        setUser(null)
-        navigate('/signin')
-        localStorage.clear()
+        handleLogout()
       }
     })
   }, [])
 
   console.log(`현재 로그인 유저 아이디`, user)
 
+  const handleLogout = () => {
+    setUser(null)
+    alert('로그아웃')
+    navigate('/signin')
+    localStorage.clear()
+  }
+
   return (
     <>
-      <Navbar>여기가 네비바</Navbar>
+      <Navbar>
+        여기가 네비바
+        <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+      </Navbar>
       <Outlet />
     </>
   )

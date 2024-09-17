@@ -77,6 +77,7 @@ export default function SignIn({ setUser }) {
     const { userId, nickname, avatar } = await login({ id: id, password: password })
     console.log('로그인 API 응답값 : ', userId, nickname, avatar)
     // 2. 상태 관리에 넣어줌
+    alert('로그인 성공')
     setUser({ userId, nickname, avatar })
     navigate('/')
   }
