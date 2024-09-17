@@ -1,12 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Detail from './pages/Detail'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import './App.css'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
-import { getUserInfo } from './lib/api/auth'
 import Layout from './components/Layout'
 
 function App() {
@@ -71,23 +70,11 @@ function App() {
 
   const [user, setUser] = useState(null)
 
-  useEffect(() => {
-    getUserInfo().then((res) => {
-      // 새로고침 시
-      console.log('useEffect 내부 , 현재 로그인 된 유저가 있나요?', res)
-      if (res) {
-        setUser({ userId: res.id, nickname: res.nickname, avatar: res.avatar })
-      }
-    })
-  }, [])
-
-  console.log(`현재 로그인 유저 아이디`, user)
-
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Layout user={user} setUser={setUser} />}>
             <Route index element={<Home expenses={expenses} setExpenses={setExpenses} />} />
             <Route path="/detail/:id" element={<Detail expenses={expenses} setExpenses={setExpenses} />} />
           </Route>
