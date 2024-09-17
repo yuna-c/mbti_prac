@@ -99,6 +99,10 @@ export default function SignUp() {
       nickname: nickname
     })
     console.log('회원가입 API 응답값 : ', response)
+    if (response) {
+      confirm('회원가입 완료')
+      navigate('/signin')
+    }
   }
 
   return (
