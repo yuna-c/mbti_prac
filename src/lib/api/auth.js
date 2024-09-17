@@ -35,3 +35,22 @@ export const login = async ({ id, password }) => {
     alert(error?.response?.data.message)
   }
 }
+
+// 회원정보 가져오기
+export const getUserInfo = async () => {
+  const accessToken = localStorage.getItem('accessToken')
+  if (accessToken) {
+    try {
+      const response = await axios.get(`${AUTH_API_HOST}/user`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        }
+      })
+      return response.data
+    } catch (error) {
+      console.log(error?.response?.data.message)
+      alert(error?.response?.data.message)
+    }
+  }
+}
