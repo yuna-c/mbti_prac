@@ -22,12 +22,12 @@ export const getExpense = async ({ queryKey }) => {
   // const [_, id] = queryKey
   try {
     // const response = await axios.get(`${JSON_SERVER_HOST}/expenses${id}`)
-    const response = await axios.get(`${JSON_SERVER_HOST}/expenses${queryKey[1]}`)
+    const response = await axios.get(`${JSON_SERVER_HOST}/expenses/${queryKey[1]}`)
     console.log(response)
     return response.data
   } catch (error) {
     console.log(error?.response?.data.message)
-    alert('데이터 로드할 수 없어요 루저야')
+    alert('개별 데이터 로드할 수 없어요 루저야')
   }
 }
 

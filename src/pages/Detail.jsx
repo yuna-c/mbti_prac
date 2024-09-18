@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
@@ -71,15 +71,27 @@ export default function Detail() {
     isLoading,
     isError
   } = useQuery({
-    queryKey: ['expenses', id],
     // useParams의 ID 추가
+    queryKey: ['expenses', id],
     queryFn: getExpense
   })
 
-  const [date, setDate] = useState(selectedExpense.date)
-  const [item, setItem] = useState(selectedExpense.item)
-  const [amount, setAmount] = useState(selectedExpense.amount)
-  const [description, setDescription] = useState(selectedExpense.description)
+  console.log(`선택된 비동기 데이터 =>`, selectedExpense)
+  // selectedExpense는 비동기로 받아온 데이터기 때문에 처음에는 값이 없다
+  const [date, setDate] = useState('')
+  const [item, setItem] = useState('')
+  const [amount, setAmount] = useState('')
+  const [description, setDescription] = useState('')
+
+  // useEffect로 값을 갖게 되면 새롭게 선택된(불러온) DB데이터로 바꿔줌
+  useEffect(() => {
+    if (selectedExpense) {
+      setDate(selectedExpense.date)
+      setItem(selectedExpense.item)
+      setAmount(selectedExpense.amount)
+      setDescription(selectedExpense.description)
+    }
+  }, [selectedExpense])
 
   const editExpense = () => {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/
