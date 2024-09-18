@@ -1,12 +1,14 @@
-import { Section } from "../pages/Home";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Section } from '../pages/Home'
+import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import { getExpenses } from '../lib/api/expense'
 
 const ExpenseItemList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`;
+`
 
 const ExpenseItem = styled.div`
   display: flex;
@@ -33,7 +35,7 @@ const ExpenseItem = styled.div`
     color: #007bff;
     flex-shrink: 0;
   }
-`;
+`
 
 const ExpenseDetails = styled.div`
   display: flex;
@@ -58,10 +60,29 @@ const ExpenseDetails = styled.div`
       max-width: 100%;
     }
   }
-`;
+`
 
-export default function ExpenseList({ expenses }) {
-  const navigate = useNavigate();
+export default function ExpenseList() {
+  const navigate = useNavigate()
+
+  // 1. 데이터 가져오기 useQuery
+  const {
+    data: expenses = [],
+    // 데이터가 아직 로딩 중이거나 오류가 발생한 경우 expenses에 빈 배열 []을 기본값으로 설정
+    isLoading,
+    isError
+  } = useQuery({
+    queryKey: ['expense'],
+    // ['expense']라는 키를 통해 getExpenses 함수의 결과를 캐싱하고, 이후 동일한 키로 쿼리를 식별
+    queryFn: getExpenses
+  })
+
+  console.log('isLoading', isLoading)
+  console.log('isError', isError)
+  console.log('expenses', expenses)
+
+  if (isLoading) return <div>로딩중</div>
+  if (isError) return <div>에러</div>
 
   return (
     <Section>
@@ -70,7 +91,7 @@ export default function ExpenseList({ expenses }) {
           <ExpenseItem
             key={expense.id}
             onClick={() => {
-              navigate(`/detail/${expense.id}`);
+              navigate(`/detail/${expense.id}`)
             }}
           >
             <ExpenseDetails>
@@ -82,5 +103,5 @@ export default function ExpenseList({ expenses }) {
         ))}
       </ExpenseItemList>
     </Section>
-  );
+  )
 }
