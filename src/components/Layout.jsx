@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { getUserInfo } from '../lib/api/auth'
+import { useAuthStore } from '../store/authStore'
 
 const Navbar = styled.nav`
   background-color: rgb(51, 51, 51);
@@ -63,7 +64,9 @@ const PageContainer = styled.div`
   padding: 6rem 2rem;
 `
 
-export default function Layout({ setUser, user }) {
+export default function Layout() {
+  const user = useAuthStore((state) => state.user)
+  const setUser = useAuthStore((state) => state.setUser)
   const navigate = useNavigate()
 
   // 냐미냐미*

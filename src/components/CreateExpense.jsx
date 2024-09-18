@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { postExpense } from '../lib/api/expense'
 import { QueryClient, useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../store/authStore'
 
 const InputRow = styled.div`
   display: flex;
@@ -48,7 +49,9 @@ const AddButton = styled.button`
   }
 `
 
-export default function CreateExpense({ user, month }) {
+export default function CreateExpense({ month }) {
+  const user = useAuthStore((state) => state.user)
+
   const [newDate, setNewDate] = useState(`2024-${String(month).padStart(2, '0')}-01`)
   const [newItem, setNewItem] = useState('')
   const [newAmount, setNewAmount] = useState('')

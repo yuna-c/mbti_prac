@@ -101,13 +101,18 @@
       "createdBy": "냐미냐미*"
     },
     {
-      "id": "6d942348-5a22-4993-8cc6-a32a27ceb0c8",
-      "month": 1,
       "date": "2024-01-01",
       "item": "식비",
       "amount": 3000,
-      "description": "고추장",
-      "createdBy": "냐미냐미*"
+      "description": "고추장 간장",
+      "id": "6d942348-5a22-4993-8cc6-a32a27ceb0c8"
+    },
+    {
+      "date": "2024-01-01",
+      "item": "그거모지",
+      "amount": 1000,
+      "description": "기둥이 용돈삭감",
+      "id": "f8081409-c33e-45bc-b8df-906a34659067"
     }
   ]
 }

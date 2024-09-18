@@ -3,6 +3,7 @@ import { useState } from 'react'
 import MonthNavigation from '../components/MonthNavigation'
 import ExpenseList from '../components/ExpenseList'
 import CreateExpense from '../components/CreateExpense'
+import { useAuthStore } from '../store/authStore'
 
 const Container = styled.main`
   max-width: 800px;
@@ -19,7 +20,7 @@ export const Section = styled.section`
   padding: 20px;
 `
 
-export default function Home({ user }) {
+export default function Home() {
   const [month, setMonth] = useState(1)
 
   // const filteredExpenses = expenses.filter((expense) => expense.month === month)
@@ -27,7 +28,7 @@ export default function Home({ user }) {
   return (
     <Container>
       <MonthNavigation month={month} setMonth={setMonth} />
-      <CreateExpense user={user} month={month} />
+      <CreateExpense month={month} />
       <ExpenseList />
     </Container>
   )

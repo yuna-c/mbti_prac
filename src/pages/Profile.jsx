@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { updateProfile } from '../lib/api/auth'
 import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../store/authStore'
 
 const Container = styled.div`
   max-width: 800px;
@@ -51,7 +52,10 @@ const Button = styled.button`
   }
 `
 
-export default function Profile({ user, setUser }) {
+export default function Profile() {
+  const user = useAuthStore((state) => state.user)
+  const setUser = useAuthStore((state) => state.setUser)
+
   const [nickname, setNickname] = useState('')
   const [avatar, setAvatar] = useState(null)
   const navigate = useNavigate()

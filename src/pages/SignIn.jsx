@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../lib/api/auth'
+import { useAuthStore } from '../store/authStore'
 
 const Container = styled.div`
   max-width: 800px;
@@ -63,7 +64,9 @@ const ToggleButton = styled.button`
   margin-bottom: 10px;
 `
 
-export default function SignIn({ setUser }) {
+export default function SignIn() {
+  const setUser = useAuthStore((state) => state.setUser)
+
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
