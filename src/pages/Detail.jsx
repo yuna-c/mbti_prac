@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
-import { getExpense } from '../lib/api/expense'
+import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
+import { getExpense, putExpense } from '../lib/api/expense'
 
 const Container = styled.div`
   max-width: 800px;
@@ -93,6 +93,17 @@ export default function Detail() {
     }
   }, [selectedExpense])
 
+  const queryClient = new QueryClient()
+
+  // 4. 데이터 사용할 때는 Mutation
+  const mutationEdit = useMutation({
+    mutationFn: putExpense,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['expenses'])
+      navigate('/')
+    }
+  })
+
   const editExpense = () => {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/
     if (!datePattern.test(date)) {
@@ -104,21 +115,30 @@ export default function Detail() {
       return
     }
 
-    const newExpenses = expenses.map((expense) => {
-      if (expense.id !== id) {
-        return expense
-      } else {
-        return {
-          ...expense,
-          date: date,
-          item: item,
-          amount: amount,
-          description: description
-        }
-      }
-    })
-    setExpenses(newExpenses)
-    navigate('/')
+    // const newExpenses = expenses.map((expense) => {
+    //   if (expense.id !== id) {
+    //     return expense
+    //   } else {
+    //     return {
+    //       ...expense,
+    //       date: date,
+    //       item: item,
+    //       amount: amount,
+    //       description: description
+    //     }
+    //   }
+    // })
+    // setExpenses(newExpenses)
+
+    const newExpenses = {
+      id: id,
+      date: date,
+      item: item,
+      amount: parseInt(amount, 10),
+      description: description
+    }
+
+    mutationEdit.mutate(newExpenses)
   }
 
   const deleteExpense = () => {

@@ -71,31 +71,25 @@
       "userId": "4111207-5f9c-4e20-912f"
     },
     {
-      "id": "86c012e7-edbf-43fd-b144-a402af06fbe5",
-      "month": 1,
       "date": "2024-01-01",
-      "item": "d",
-      "amount": null,
-      "description": "d",
-      "createdBy": "냐미냐미*"
+      "item": "식비",
+      "amount": 20000,
+      "description": "삼겹살",
+      "id": "86c012e7-edbf-43fd-b144-a402af06fbe5"
     },
     {
-      "id": "82eb05e1-36e7-4e04-8a62-d0718f66cfd3",
-      "month": 1,
-      "date": "2024-01-01",
-      "item": "d",
-      "amount": 2314141,
-      "description": "41242",
-      "createdBy": "냐미냐미*"
+      "date": "2024-01-22",
+      "item": "교통비",
+      "amount": 300000,
+      "description": "추석",
+      "id": "82eb05e1-36e7-4e04-8a62-d0718f66cfd3"
     },
     {
-      "id": "f9fee868-4f68-4546-baf4-e3fea1ad33f7",
-      "month": 1,
       "date": "2024-01-01",
-      "item": "집",
-      "amount": 32222,
-      "description": "직므",
-      "createdBy": "냐미냐미*"
+      "item": "추석 용돈",
+      "amount": 20000,
+      "description": "조카 용돈",
+      "id": "f9fee868-4f68-4546-baf4-e3fea1ad33f7"
     },
     {
       "id": "06378dc8-6d31-4090-ad2a-4efcba073921",

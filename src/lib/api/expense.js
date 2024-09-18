@@ -11,7 +11,7 @@ export const getExpenses = async () => {
     console.log(response)
     return response.data
   } catch (error) {
-    console.log(error?.response?.data.message)
+    console.log(error)
     alert('데이터 로드할 수 없어요 루저야')
   }
 }
@@ -26,7 +26,7 @@ export const getExpense = async ({ queryKey }) => {
     console.log(response)
     return response.data
   } catch (error) {
-    console.log(error?.response?.data.message)
+    console.log(error)
     alert('개별 데이터 로드할 수 없어요 루저야')
   }
 }
@@ -39,7 +39,20 @@ export const postExpense = async (newExpense /*새로운 지출*/) => {
     console.log(data)
     return data
   } catch (error) {
-    console.log(error?.response?.data.message)
+    console.log(error)
     alert('데이터 써지지 않아요 루저야')
+  }
+}
+
+// 수정된 지출 데이터
+export const putExpense = async (updatedExpense) => {
+  const { id, ...rest } = updatedExpense // 아이디 빼고 다 바뀜
+  try {
+    const { data } = await axios.put(`${JSON_SERVER_HOST}/expenses/${id}`, rest)
+    console.log(data)
+    return data
+  } catch (error) {
+    console.log(error)
+    alert('데이터 수정이 되지 않아요 루저야')
   }
 }
