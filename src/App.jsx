@@ -78,7 +78,7 @@ function App() {
           <Route path="/" element={<Layout user={user} setUser={setUser} />}>
             <Route index element={<Home expenses={expenses} setExpenses={setExpenses} />} />
             <Route path="/detail/:id" element={<Detail expenses={expenses} setExpenses={setExpenses} />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
           </Route>
 
           <Route path="/signin" element={<SignIn setUser={setUser} />} />

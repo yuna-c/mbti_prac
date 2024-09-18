@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { updateProfile } from '../lib/api/auth'
+import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
   max-width: 800px;
@@ -50,9 +51,10 @@ const Button = styled.button`
   }
 `
 
-export default function Profile() {
+export default function Profile({ user, setUser }) {
   const [nickname, setNickname] = useState('')
   const [avatar, setAvatar] = useState(null)
+  const navigate = useNavigate()
 
   const handleUpdateProfile = async () => {
     console.log(nickname)
@@ -66,7 +68,13 @@ export default function Profile() {
     formData.append('avatar', avatar)
 
     // formData undefined 이유 : updateProfile에 안 넣어줌
-    await updateProfile(formData)
+    const response = await updateProfile(formData) // 전체 객체 response 받기
+
+    if (response.success) {
+      // user데이터는 그대로 받아오 되, 바뀌는 닉네임과 아바타만 변경
+      setUser({ ...user, nickname: response.nickname, avatar: response.avatar })
+      navigate('/')
+    }
   }
   return (
     <Container className="Profile">
