@@ -92,13 +92,11 @@
       "id": "f9fee868-4f68-4546-baf4-e3fea1ad33f7"
     },
     {
-      "id": "06378dc8-6d31-4090-ad2a-4efcba073921",
-      "month": 1,
       "date": "2024-01-01",
-      "item": "집",
+      "item": "관리비",
       "amount": 30000,
-      "description": "12:10 지금지금",
-      "createdBy": "냐미냐미*"
+      "description": "쓰레기봉투",
+      "id": "06378dc8-6d31-4090-ad2a-4efcba073921"
     },
     {
       "id": "7ac70e71-a530-4b06-b7ff-e04dfdbfb59b",

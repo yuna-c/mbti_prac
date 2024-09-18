@@ -99,8 +99,11 @@ export default function Detail() {
   const mutationEdit = useMutation({
     mutationFn: putExpense,
     onSuccess: () => {
-      queryClient.invalidateQueries(['expenses'])
+      // expenses가 들어간 모든 useQuery 키 값들을 다 리패치 시키기 때문에
+      // queryClient.invalidateQueries(['expenses']) 이 코드가 실행되는 시점에
+      // 페이지 데이터 자체가 리패치가 되고 리랜더링이 되기 때문에 네비게이트까지 콜이 가지 않아서 순서 변경
       navigate('/')
+      queryClient.invalidateQueries(['expenses'])
     }
   })
 
