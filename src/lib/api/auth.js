@@ -55,3 +55,29 @@ export const getUserInfo = async () => {
     }
   }
 }
+
+// 업데이트 프로필
+// https://developer.mozilla.org/ko/docs/Web/API/FormData
+export const updateProfile = async (formData /*{ nickname, avatar }*/) => {
+  console.log(formData)
+  const accessToken = localStorage.getItem('accessToken')
+  if (accessToken) {
+    try {
+      const response = await axios.petch(
+        `${AUTH_API_HOST}/profile`,
+        { formData },
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      )
+      return response.data
+    } catch (error) {
+      console.log(error?.response?.data.message)
+      alert(error?.response?.data.message)
+      localStorage.clear()
+    }
+  }
+}
