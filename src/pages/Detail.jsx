@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router-dom'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
-import { getExpense, putExpense } from '../lib/api/expense'
+import { getExpense, putExpense, deleteExpense } from '../lib/api/expense'
 
 const Container = styled.div`
   max-width: 800px;
@@ -107,7 +107,16 @@ export default function Detail() {
     }
   })
 
-  const editExpense = () => {
+  // 5. 데이터 삭제할 때는 Mutation
+  const mutationDelete = useMutation({
+    mutationFn: deleteExpense,
+    onSuccess: () => {
+      navigate('/')
+      queryClient.invalidateQueries(['expenses'])
+    }
+  })
+
+  const handleEditExpense = () => {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/
     if (!datePattern.test(date)) {
       alert('날짜를 YYYY-MM-DD 형식으로 입력해주세요.')
@@ -144,14 +153,16 @@ export default function Detail() {
     mutationEdit.mutate(newExpenses)
   }
 
-  const deleteExpense = () => {
-    const newExpenses = expenses.filter((expense) => expense.id !== id)
-    setExpenses(newExpenses)
-    navigate('/')
+  const handleDeleteExpense = () => {
+    // const newExpenses = expenses.filter((expense) => expense.id !== id)
+    // setExpenses(newExpenses)
+    // navigate('/')
+
+    mutationDelete.mutate(id)
   }
 
-  console.log('isLoading', isLoading)
-  console.log('isError', isError)
+  // console.log('isLoading', isLoading)
+  // console.log('isError', isError)
 
   if (isLoading) return <div>로딩중</div>
   if (isError) return <div>에러</div>
@@ -175,8 +186,8 @@ export default function Detail() {
         <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="지출 내용" />
       </InputGroup>
       <ButtonGroup>
-        <Button onClick={editExpense}>수정</Button>
-        <Button danger="true" onClick={deleteExpense}>
+        <Button onClick={handleEditExpense}>수정</Button>
+        <Button danger="true" onClick={handleDeleteExpense}>
           삭제
         </Button>
         <BackButton onClick={() => navigate(-1)}>뒤로 가기</BackButton>

@@ -56,3 +56,15 @@ export const putExpense = async (updatedExpense) => {
     alert('데이터 수정이 되지 않아요 루저야')
   }
 }
+
+// 삭제된 지출 데이터
+export const deleteExpense = async (id) => {
+  console.log(id)
+  try {
+    const { data } = await axios.delete(`${JSON_SERVER_HOST}/expenses/${id}`)
+    return data
+  } catch (error) {
+    console.log(error)
+    alert('데이터 삭제가 되지 않아요 루저야')
+  }
+}

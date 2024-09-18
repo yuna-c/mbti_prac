@@ -78,13 +78,6 @@
       "id": "86c012e7-edbf-43fd-b144-a402af06fbe5"
     },
     {
-      "date": "2024-01-22",
-      "item": "교통비",
-      "amount": 300000,
-      "description": "추석",
-      "id": "82eb05e1-36e7-4e04-8a62-d0718f66cfd3"
-    },
-    {
       "date": "2024-01-01",
       "item": "추석 용돈",
       "amount": 20000,
@@ -97,15 +90,6 @@
       "amount": 30000,
       "description": "쓰레기봉투",
       "id": "06378dc8-6d31-4090-ad2a-4efcba073921"
-    },
-    {
-      "id": "7ac70e71-a530-4b06-b7ff-e04dfdbfb59b",
-      "month": 1,
-      "date": "2024-01-01",
-      "item": "개인사업",
-      "amount": 30000,
-      "description": "30000",
-      "createdBy": "냐미냐미*"
     },
     {
       "id": "1718dfb8-db9d-4a5c-8748-accd3b0e89e4",
