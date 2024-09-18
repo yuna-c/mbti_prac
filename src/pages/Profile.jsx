@@ -65,7 +65,8 @@ export default function Profile() {
     formData.append('nickname', nickname)
     formData.append('avatar', avatar)
 
-    await updateProfile()
+    // formData undefined 이유 : updateProfile에 안 넣어줌
+    await updateProfile(formData)
   }
   return (
     <Container className="Profile">
