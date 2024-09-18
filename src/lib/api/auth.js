@@ -23,7 +23,7 @@ export const register = async ({ id, password, nickname }) => {
 export const login = async ({ id, password }) => {
   try {
     // ?expiresIn=10m : 유효시간을 10분인 accessToken 요청
-    const response = await axios.post(`${AUTH_API_HOST}/login?expiresIn=10m`, {
+    const response = await axios.post(`${AUTH_API_HOST}/login?expiresIn=60m`, {
       id: id,
       password: password
     })

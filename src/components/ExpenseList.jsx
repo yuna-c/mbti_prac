@@ -98,7 +98,7 @@ export default function ExpenseList() {
               <span>{expense.date}</span>
               <span>{`${expense.item} - ${expense.description}`}</span>
             </ExpenseDetails>
-            <span>{expense.amount.toLocaleString()} 원</span>
+            <span>{expense.amount ? expense.amount.toLocaleString() : '금액 정보 없음'} 원</span>
           </ExpenseItem>
         ))}
       </ExpenseItemList>
