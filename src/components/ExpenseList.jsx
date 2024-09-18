@@ -70,6 +70,7 @@ export default function ExpenseList() {
     data: expenses = [],
     // 데이터가 아직 로딩 중이거나 오류가 발생한 경우 expenses에 빈 배열 []을 기본값으로 설정
     isLoading,
+    refetch,
     isError
   } = useQuery({
     queryKey: ['expenses'],
@@ -86,6 +87,7 @@ export default function ExpenseList() {
 
   return (
     <Section>
+      <button onClick={refetch}>데이터 새로고침</button>
       <ExpenseItemList>
         {expenses.map((expense) => (
           <ExpenseItem

@@ -123,6 +123,15 @@
       "amount": 12000,
       "description": "간장",
       "createdBy": "냐미냐미*"
+    },
+    {
+      "id": "6d942348-5a22-4993-8cc6-a32a27ceb0c8",
+      "month": 1,
+      "date": "2024-01-01",
+      "item": "식비",
+      "amount": 3000,
+      "description": "고추장",
+      "createdBy": "냐미냐미*"
     }
   ]
 }
