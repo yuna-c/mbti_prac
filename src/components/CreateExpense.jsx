@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { postExpense } from '../lib/api/expense'
-import { useMutation } from '@tanstack/react-query'
+import { QueryClient, useMutation } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 
 const InputRow = styled.div`
   display: flex;
@@ -52,9 +53,22 @@ export default function CreateExpense({ user, month }) {
   const [newItem, setNewItem] = useState('')
   const [newAmount, setNewAmount] = useState('')
   const [newDescription, setNewDescription] = useState('')
+  const navigate = useNavigate()
+
+  const queryClient = new QueryClient()
 
   // 2. 데이터 사용할 때는 Mutation
-  const mutation = useMutation({ mutationFn: postExpense })
+  const mutation = useMutation({
+    mutationFn: postExpense,
+    onSuccess: () => {
+      // usequery 사용시 캐시처리 => 데이터 쓰더라도 API가 지정해준 캐시타임 안쪽에는 이전의 데이터를 줌
+      // 쓰거나 추가 삭제하면 새로운 데이터가 와 줘야 하기 때문에 useQuery의 expenses쿼리키를  invalidateQueries배열 안에 넣어주면
+      // useMutation에서 mutationFn 성공시 expenses라는 쿼리 키 값의 가진 애들의 캐시를 다 없애줌
+      // 새롭게 useQuery가 실행이 될 때 캐시 데이터를 가져오지 않고 새롭게 다시 패치
+      queryClient.invalidateQueries(['expenses'])
+      navigate(0)
+    }
+  })
 
   const handleAddExpense = () => {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/

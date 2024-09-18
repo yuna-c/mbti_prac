@@ -72,7 +72,7 @@ export default function ExpenseList() {
     isLoading,
     isError
   } = useQuery({
-    queryKey: ['expense'],
+    queryKey: ['expenses'],
     // ['expense']라는 키를 통해 getExpenses 함수의 결과를 캐싱하고, 이후 동일한 키로 쿼리를 식별
     queryFn: getExpenses
   })
