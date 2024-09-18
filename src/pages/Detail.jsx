@@ -1,6 +1,8 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from 'react'
+import styled from 'styled-components'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import { getExpense } from '../lib/api/expense'
 
 const Container = styled.div`
   max-width: 800px;
@@ -8,7 +10,7 @@ const Container = styled.div`
   padding: 20px;
   background-color: #ffffff;
   border-radius: 16px;
-`;
+`
 
 const InputGroup = styled.div`
   display: flex;
@@ -28,16 +30,16 @@ const InputGroup = styled.div`
     border-radius: 4px;
     font-size: 14px;
   }
-`;
+`
 
 const ButtonGroup = styled.div`
   display: flex;
   gap: 10px;
-`;
+`
 
 const Button = styled.button`
   padding: 10px 20px;
-  background-color: ${(props) => (props.danger ? "#ff4d4d" : "#007bff")};
+  background-color: ${(props) => (props.danger ? '#ff4d4d' : '#007bff')};
   color: white;
   border: none;
   border-radius: 4px;
@@ -45,9 +47,9 @@ const Button = styled.button`
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: ${(props) => (props.danger ? "#cc0000" : "#0056b3")};
+    background-color: ${(props) => (props.danger ? '#cc0000' : '#0056b3')};
   }
-`;
+`
 
 const BackButton = styled(Button)`
   background-color: #6c757d;
@@ -55,94 +57,87 @@ const BackButton = styled(Button)`
   &:hover {
     background-color: #5a6268;
   }
-`;
+`
 
-export default function Detail({ expenses, setExpenses }) {
-  const navigate = useNavigate();
-  const { id } = useParams();
+export default function Detail() {
+  const navigate = useNavigate()
+  const { id } = useParams()
 
-  const selectedExpense = expenses.find((element) => element.id === id);
+  // const selectedExpense = expenses.find((element) => element.id === id)
 
-  const [date, setDate] = useState(selectedExpense.date);
-  const [item, setItem] = useState(selectedExpense.item);
-  const [amount, setAmount] = useState(selectedExpense.amount);
-  const [description, setDescription] = useState(selectedExpense.description);
+  // 3. useQuery
+  const {
+    data: selectedExpense,
+    isLoading,
+    isError
+  } = useQuery({
+    queryKey: ['expenses', id],
+    // useParams의 ID 추가
+    queryFn: getExpense
+  })
+
+  const [date, setDate] = useState(selectedExpense.date)
+  const [item, setItem] = useState(selectedExpense.item)
+  const [amount, setAmount] = useState(selectedExpense.amount)
+  const [description, setDescription] = useState(selectedExpense.description)
 
   const editExpense = () => {
-    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/
     if (!datePattern.test(date)) {
-      alert("날짜를 YYYY-MM-DD 형식으로 입력해주세요.");
-      return;
+      alert('날짜를 YYYY-MM-DD 형식으로 입력해주세요.')
+      return
     }
     if (!item || amount <= 0) {
-      alert("유효한 항목과 금액을 입력해주세요.");
-      return;
+      alert('유효한 항목과 금액을 입력해주세요.')
+      return
     }
 
     const newExpenses = expenses.map((expense) => {
       if (expense.id !== id) {
-        return expense;
+        return expense
       } else {
         return {
           ...expense,
           date: date,
           item: item,
           amount: amount,
-          description: description,
-        };
+          description: description
+        }
       }
-    });
-    setExpenses(newExpenses);
-    navigate("/");
-  };
+    })
+    setExpenses(newExpenses)
+    navigate('/')
+  }
 
   const deleteExpense = () => {
-    const newExpenses = expenses.filter((expense) => expense.id !== id);
-    setExpenses(newExpenses);
-    navigate("/");
-  };
+    const newExpenses = expenses.filter((expense) => expense.id !== id)
+    setExpenses(newExpenses)
+    navigate('/')
+  }
+
+  console.log('isLoading', isLoading)
+  console.log('isError', isError)
+
+  if (isLoading) return <div>로딩중</div>
+  if (isError) return <div>에러</div>
 
   return (
     <Container>
       <InputGroup>
         <label htmlFor="date">날짜</label>
-        <input
-          type="text"
-          id="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          placeholder="YYYY-MM-DD"
-        />
+        <input type="text" id="date" value={date} onChange={(e) => setDate(e.target.value)} placeholder="YYYY-MM-DD" />
       </InputGroup>
       <InputGroup>
         <label htmlFor="item">항목</label>
-        <input
-          type="text"
-          id="item"
-          value={item}
-          onChange={(e) => setItem(e.target.value)}
-          placeholder="지출 항목"
-        />
+        <input type="text" id="item" value={item} onChange={(e) => setItem(e.target.value)} placeholder="지출 항목" />
       </InputGroup>
       <InputGroup>
         <label htmlFor="amount">금액</label>
-        <input
-          type="number"
-          id="amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          placeholder="지출 금액"
-        />
+        <input type="number" id="amount" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="지출 금액" />
       </InputGroup>
       <InputGroup>
         <label htmlFor="description">내용</label>
-        <input
-          type="text"
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="지출 내용"
-        />
+        <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="지출 내용" />
       </InputGroup>
       <ButtonGroup>
         <Button onClick={editExpense}>수정</Button>
@@ -152,5 +147,5 @@ export default function Detail({ expenses, setExpenses }) {
         <BackButton onClick={() => navigate(-1)}>뒤로 가기</BackButton>
       </ButtonGroup>
     </Container>
-  );
+  )
 }
